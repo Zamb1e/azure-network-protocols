@@ -23,7 +23,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 - Step 1: Create Virtual Machines
 - Step 2: Remote Desktop into VMs
-- Step 3: Install & Run WireShark
+- Step 3: Install & Run Wireshark
 - Step 4: Test Connectivity Between VMs
 - Step 5: Alter Network Security Group Settings
 - Step 6: SSH into VM
@@ -74,7 +74,7 @@ Step 4: Go to VM2 on Azure Portal --> "overview" --> copy the "private IP addres
 <img src="https://imgur.com/AgVXdZo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Step 5: Go back to Azure Portal --> type "Network Security Group" in the search bar (this is the VMs firewall) --> select "VM2-NSG" --> "Inbound security rules" under settings --> click "+ add" --> in the new pop up window change "protocol" to "ICMP" --> change "action" to "deny" --> change "Name" to "Deny_ICMP_Ping" --> Click "add" at bottom. *Notice how the ping cmd in PowerShell on VM1 done on step#4 is immediately halted due to being blocked by VM2's firewall thanks to the new inbound security rule you made. If you edit the rule to allow traffic, notice how the perpetual ping cmds successfully resume. *Press Ctrl+C to stop PowerShell ping
+Step 5: Go back to Azure Portal --> type "Network Security Group" in the search bar (this is the VMs firewall) --> select "VM2-NSG" --> "Inbound security rules" under settings --> click "+ add" --> in the new pop up window change "protocol" to "ICMP" --> change "action" to "deny" --> change "Name" to "Deny_ICMP_Ping" --> Click "add" at bottom. *Notice how the ping command in PowerShell on VM1, done on step 4, is immediately halted due to being blocked by VM2's firewall, thanks to the new inbound security rule you made. If you edit the rule to allow traffic, notice how the perpetual ping commands successfully resume. *Press Ctrl+C to stop the PowerShell ping
 </p>
 <br />
 
@@ -83,7 +83,7 @@ Step 5: Go back to Azure Portal --> type "Network Security Group" in the search 
 <img src="https://imgur.com/15ct7pU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Step 6: SSH into VM2 from VM1 via PowerShell. Type "SSH" into WireShark's filter bar (reference step 3) --> Go to "PowerShell" again, type "ssh labuser@(VM1 private IP address)" into the cmd line *view screenshot above for help --> Type "yes" to connection prompt --> enter password on next cmd line (password will not show but enter it anyway and press enter key, it will register) --> You have now successfully remotely logged into VM2's command-line Interface (CLI). It should now read "labuser@VM2:". You can type a linux cmd such as: "id" to see the new network traffic between the VMs since linking via SSH. When finished exploring, type "exit" into cmd line on PowerShell to end the connection. 
+Step 6: SSH into VM2 from VM1 via PowerShell. Type "SSH" into WireShark's filter bar (reference step 3) --> Go to "PowerShell" again, type "ssh labuser@(VM1 private IP address)" into the cmd line *view screenshot above for help --> Type "yes" to connection prompt --> enter password on next cmd line (password will not show but enter it anyway and press enter key, it will register) --> You have now successfully remotely logged into VM2's command-line Interface (CLI). It should now read "labuser@VM2:". You can type a Linux command such as "id" to see the new network traffic between the VMs since linking via SSH. When finished exploring, type "exit" into cmd line on PowerShell to end the connection. 
 </p>
 <br />
 
@@ -91,6 +91,6 @@ Step 6: SSH into VM2 from VM1 via PowerShell. Type "SSH" into WireShark's filter
 <img src="https://imgur.com/UdMf24u.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Step 7: Next you will observe DHCP traffic the same as you did with SSH. Type "DHCP" into WireShark's filter bar (reference step 3) --> Go to "PowerShell" again, type "ipconfig /renew" into the cmd line to request a new IP address for VM1 from the Azure DHCP server (you may lose connection to the VM, if so, just RDH back into it) --> You should see the newly issued IP address in WireShark. That concludes this lab.
+Step 7: Next, you will observe DHCP traffic in the same way as you did with SSH. Type "DHCP" into WireShark's filter bar (reference step 3) --> Go to "PowerShell" again, type "ipconfig /renew" into the cmd line to request a new IP address for VM1 from the Azure DHCP server (you may lose connection to the VM, if so, just RDH back into it) --> You should see the newly issued IP address in WireShark. That concludes this lab.
 </p>
 <br />
